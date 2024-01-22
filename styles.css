@@ -1,61 +1,16 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+.highlight {
+    background-color: yellow; /* Warna latar belakang untuk menyorot karakter yang sesuai */
 }
 
-.container {
-    max-width: 600px;  /* Menyesuaikan lebar maksimum */
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.result{
+    font-size: 0.8rem;
+    --box-shadow-color: white;
+    box-shadow: 0 0 30px var(--box-shadow-color);
 }
 
-label, input, button {
-    display: block;
-    margin: 8px 0;  /* Mengurangi margin agar lebih kompak */
-}
-
-input[type="text"],
-input[type="number"] {
-    width: calc(100% - 20px);  /* Menyesuaikan lebar input dengan margin */
-    padding: 8px;
-}
-
-button {
-    width: calc(100% - 20px);  /* Menyesuaikan lebar tombol dengan margin */
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 8px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 6px;  /* Mengurangi padding agar lebih kompak */
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-#searchResults {
-    text-align: left;
+.result:hover{
+    /* font-size: 1rem;
+    padding-left: 50px; */
+    padding: 2px 2px 4px 2px;
+    --box-shadow-color: rgb(78, 121, 249);
 }

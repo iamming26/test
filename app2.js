@@ -1,11 +1,3 @@
-const searchInput = document.getElementById('search');
-const searchResultsDiv = document.getElementById('searchResults');
-const addItemForm = document.getElementById('addItemForm');
-const selectedItemIdInput = document.getElementById('selectedItemId');
-const selectedItemNameInput = document.getElementById('selectedItemName');
-const quantityInput = document.getElementById('quantity');
-const cartTableBody = document.getElementById('cartBody');
-
 const dataBarang = [
     { code_material: "89900000", barcode: "8992931009547", merk: "Tessa", code_desc: "TOT04", item_desc: "Toilet 110g 2p", in_ct: "-", cubication: "-", disc: "0%", note_disc: "-", note: "-" },
     { code_material: "89900002", barcode: "8992931019522", merk: "Dinasty", code_desc: "TOD02", item_desc: "Toilet 180g 2p ", in_ct: "-", cubication: "-", disc: "0%", note_disc: "-", note: "-" },
@@ -50,94 +42,6 @@ const dataBarang = [
     // Tambahkan data barang sesuai kebutuhan
 ];
 
-// Fungsi untuk merender hasil pencarian
-function renderSearchResults(results) {
-    searchResultsDiv.innerHTML = '';
-
-    results.forEach(barang => {
-        const resultDiv = document.createElement('div');
-        resultDiv.innerHTML = `
-        <p class="m-0 result"><span class="badge rounded-pill text-bg-warning">${barang.code_material}</span> <span class="badge rounded-pill text-bg-primary">${barang.code_desc}</span> <span class="badge rounded-pill text-bg-warning">${barang.barcode}</span> <span class="badge rounded-pill text-bg-warning">${barang.item_desc}</span></p>
-        `;
-        resultDiv.addEventListener('click', function() {
-            fillAddForm(barang);
-            addItemForm.quantity.focus();
-        });
-        searchResultsDiv.appendChild(resultDiv);
-    });
-}
-
-// Fungsi untuk mengisi form penambahan barang berdasarkan barang yang dipilih
-function fillAddForm(selectedBarang) {
-    selectedItemIdInput.value = selectedBarang.code_material;
-    selectedItemNameInput.value = selectedBarang.code_desc;
-    quantityInput.value = "";
-
-}
-
-// Fungsi untuk menambahkan barang ke dalam keranjang
-function addToCart(event) {
-    event.preventDefault();
-
-    const id = selectedItemIdInput.value;
-    const kuantitas = parseInt(quantityInput.value, 10);
-
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-        <td>${id}</td>
-        <td> </td>
-        <td>${kuantitas}</td>
-    `;
-
-    cartTableBody.appendChild(newRow);
-
-    // Reset form dan sembunyikan
-    addItemForm.reset();
-    searchInput.value = "";
-    searchInput.focus();
-}
-
-// Fungsi untuk mencari item berdasarkan ID
-function findItemById(id) {
-    return dataBarang.find(item => item.id === id);
-}
-
-// Event listener untuk input pencarian
-searchInput.addEventListener('input', function() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const searchResults = dataBarang.filter(item =>
-        Object.values(item).some(value =>
-            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    )
-    renderSearchResults(searchResults);
-});
-
-function copyValueTable(){
-    var table = document.getElementById('cartTable');
-
-      // Membuat elemen textarea untuk menampung HTML tabel
-      var textarea = document.createElement('textarea');
-      textarea.value = table.outerHTML;
-
-      // Menambahkan elemen textarea ke dokumen
-      document.body.appendChild(textarea);
-
-      // Memilih dan menyalin isi textarea
-      textarea.select();
-      document.execCommand('copy');
-
-      // Menghapus elemen textarea
-      document.body.removeChild(textarea);
-
-      alert('Table content copied to clipboard!');
-}
-
-// Event listener untuk form penambahan barang
-addItemForm.addEventListener('submit', addToCart);
-
-
-
 //Fungsi menampilkan data dihalaman master data
 function showMasterData() {
     var tbody = document.getElementById('tableMasterData').getElementsByTagName('tbody')[0];
@@ -171,3 +75,45 @@ function showMasterData() {
 
 // Panggil fungsi untuk menampilkan data saat halaman dimuat
 showMasterData();
+
+// Fungsi untuk melakukan pencarian berdasarkan input pengguna
+function searchData() {
+    var input, filter, table, tbody, tr, td, i, j, txtValue, highlightedText;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tableMasterData");
+    tbody = table.getElementsByTagName("tbody")[0];
+    tr = tbody.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td");
+        var isMatch = false;
+
+        for (j = 0; j < td.length; j++) {
+            txtValue = td[j].textContent || td[j].innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                isMatch = true;
+                highlightedText = highlightMatchingText(txtValue, filter);
+                td[j].innerHTML = highlightedText;
+            } else {
+                td[j].innerHTML = txtValue;
+            }
+        }
+
+        // Tampilkan baris yang sesuai dengan input dan sorotan (highlight)
+        if (isMatch) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+
+// Fungsi untuk menyorot karakter yang sesuai dengan inputan
+function highlightMatchingText(text, filter) {
+    var pattern = new RegExp(filter, "ig");
+    return text.replace(pattern, function(match) {
+        return "<span class='highlight'>" + match + "</span>";
+    });
+}

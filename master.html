@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/assets/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>My App | Master Data</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5>Master Data</h5>
+                <a href="index.html"> Form SAP</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="search" class="form-label">Cari:</label>
+                        <input type="text" class="form-control" placeholder="Katakunci" name="search" id="search" autofocus="true" oninput="searchData()">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <table class="table table-sm table-striped table-hover" id="tableMasterData">
+                            <thead class="bg-primary">
+                                <tr class="align-middle">
+                                    <th class="bg-primary text-white" style="width: 10%;">ID Material</th>
+                                    <th class="bg-primary text-white" style="width: 10%;">Barcode</th>
+                                    <th class="bg-primary text-white" style="width: 15%;">Merk</th>
+                                    <th class="bg-primary text-white" style="width: 10%;">Code Desc</th>
+                                    <th class="bg-primary text-white" style="width: 35%;">Item Desc</th>
+                                    <th class="bg-primary text-white" style="width: 5%;">In Carton</th>
+                                    <th class="bg-primary text-white" style="width: 10%;">Cubication</th>
+                                    <th class="bg-primary text-white" style="width: 5%;">Disc</th>
+                                    <th class="bg-primary text-white" style="width: 15%;">Note Disc</th>
+                                    <th class="bg-primary text-white" style="width: 10%;">Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app2.js"></script>
+</body>
+</html>

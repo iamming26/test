@@ -3,42 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>Aplikasi Kasir</title>
+    <title>My App | Form SAP</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Aplikasi Kasir</h1>
-        <label for="search">Cari Barang:</label>
-        <input type="text" id="search" placeholder="Nama barang...">
-        <div id="searchResults">
-            <!-- Hasil pencarian akan ditampilkan di sini -->
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5>Form SAP</h5>
+                <a href="master.html"> Data Master</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <label for="search">Cari Barang:</label>
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Kata kunci...">
+                        <div id="searchResults" class="my-2 card p-2">
+                
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <form class="row g-3" id="addItemForm">
+                            <div class="col-4">
+                                <label for="selectedItemId">ID MATERIAL:</label>
+                                <input type="text" class="form-control" id="selectedItemId" readonly>
+                            </div>
+                            <div class="col-4">
+                                <label for="selectedItemName">CODE DESC:</label>
+                                <input type="text" class="form-control" id="selectedItemName" readonly>
+                            </div>
+                            <div class="col-4">
+                                <label for="quantity">QTY:</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                            </div>
+                            <div class="col-12 d-flex justify-content-between">
+                                <button type="button" onclick="copyValueTable()" id="copy" class="btn btn-success">Copy</button>
+                                <button type="submit" class="btn btn-primary">Add +</button>
+                            </div>
+                        </form>
+
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>ID MATERIAL</th>
+                                    <th> </th>
+                                    <th>QTY</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table id="cartTable" class="table table-sm">
+                            <tbody id="cartBody">
+                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form id="addItemForm">
-            <label for="selectedItemId">ID Barang:</label>
-            <input type="text" id="selectedItemId" readonly>
-            <label for="selectedItemName">Nama Barang:</label>
-            <input type="text" id="selectedItemName" readonly>
-            <label for="quantity">Kuantitas:</label>
-            <input type="number" id="quantity" min="1" required>
-            <button type="submit">Tambah ke Keranjang</button>
-        </form>
-        <h2>Keranjang Belanja</h2>
-        <table id="cartTable">
-            <thead>
-                <tr>
-                    <th>ID Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Kuantitas</th>
-                    <th>Total Harga</th>
-                </tr>
-            </thead>
-            <tbody id="cartBody">
-                <!-- Item dalam keranjang akan ditampilkan di sini -->
-            </tbody>
-        </table>
     </div>
 
+    <script src="bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
